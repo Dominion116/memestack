@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, TrendingUp, Wallet, Coins, CheckCircle, ExternalLink, Loader2 } from 'lucide-react';
+import { Plus, TrendingUp, Wallet, Coins, CheckCircle, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -21,9 +21,8 @@ import { useWallet } from '@/lib/hooks/useWallet';
 import { useLaunches } from '@/lib/hooks/useLaunches';
 import { useContractCall } from '@/lib/hooks/useContractCall';
 import { getUserContribution, getCurrentBlockHeight } from '@/lib/stacks/contract';
-import { formatSTX, formatAddress, formatPercentage } from '@/lib/utils/format';
+import { formatSTX } from '@/lib/utils/format';
 import type { Launch, LaunchContribution } from '@/lib/types';
-import { cn } from '@/lib/utils';
 
 interface UserLaunchData extends Launch {
   contribution?: LaunchContribution;
@@ -43,6 +42,7 @@ function DashboardContent() {
     if (address && launches.length > 0) {
       fetchUserData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [address, launches]);
 
   const fetchUserData = async () => {

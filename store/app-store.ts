@@ -1,10 +1,9 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AppConfig, UserSession, showConnect } from '@stacks/connect';
-import { StacksTestnet, StacksMainnet } from '@stacks/network';
 import type { WalletState } from '@/lib/types';
 import { getAccountBalance } from '@/lib/stacks/contract';
-import { IS_MAINNET, APP_NAME, CONTRACT_ADDRESS } from '@/lib/stacks/constants';
+import { IS_MAINNET, APP_NAME } from '@/lib/stacks/constants';
 
 interface AppState extends WalletState {
   // Wallet methods

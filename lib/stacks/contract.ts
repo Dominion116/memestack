@@ -1,7 +1,6 @@
 import {
-  callReadOnlyFunction,
+  fetchCallReadOnlyFunction,
   cvToJSON,
-  ClarityValue,
   uintCV,
   principalCV,
   stringAsciiCV,
@@ -23,7 +22,7 @@ import type {
   BuyTokensParams,
   ApiResponse,
 } from '../types';
-import { parseContractResponse, logError } from '../utils/errors';
+import { logError } from '../utils/errors';
 
 /**
  * Read-only contract calls
@@ -34,7 +33,7 @@ import { parseContractResponse, logError } from '../utils/errors';
  */
 export async function getLaunch(launchId: number): Promise<ApiResponse<Launch>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'get-launch',
@@ -70,7 +69,7 @@ export async function getUserContribution(
   userAddress: string
 ): Promise<ApiResponse<LaunchContribution>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'get-user-contribution',
@@ -96,7 +95,7 @@ export async function getUserContribution(
  */
 export async function getCurrentLaunchId(): Promise<ApiResponse<number>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'get-current-launch-id',
@@ -122,7 +121,7 @@ export async function getCurrentLaunchId(): Promise<ApiResponse<number>> {
  */
 export async function isLaunchActive(launchId: number): Promise<ApiResponse<boolean>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'is-launch-active',
@@ -151,7 +150,7 @@ export async function calculateTokensForSTX(
   stxAmount: bigint
 ): Promise<ApiResponse<bigint>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'calculate-tokens-for-stx',
@@ -177,7 +176,7 @@ export async function calculateTokensForSTX(
  */
 export async function getLaunchStats(launchId: number): Promise<ApiResponse<LaunchStats>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'get-launch-stats',
@@ -201,9 +200,9 @@ export async function getLaunchStats(launchId: number): Promise<ApiResponse<Laun
 /**
  * Get platform information
  */
-export async function getPlatformInfo(): Promise<ApiResponse<any>> {
+export async function getPlatformInfo(): Promise<ApiResponse<unknown>> {
   try {
-    const result = await callReadOnlyFunction({
+    const result = await fetchCallReadOnlyFunction({
       contractAddress: CONTRACT_ADDRESS,
       contractName: CONTRACT_NAME,
       functionName: 'get-platform-info',
@@ -233,7 +232,7 @@ export async function getPlatformInfo(): Promise<ApiResponse<any>> {
  */
 export async function createLaunch(
   params: CreateLaunchParams,
-  onFinish?: (data: any) => void,
+  onFinish?: (data: FinishTxData) => void,
   onCancel?: () => void
 ): Promise<void> {
   try {
@@ -269,7 +268,7 @@ export async function createLaunch(
  */
 export async function buyTokens(
   params: BuyTokensParams,
-  onFinish?: (data: any) => void,
+  onFinish?: (data: FinishTxData) => void,
   onCancel?: () => void
 ): Promise<void> {
   try {
@@ -297,7 +296,7 @@ export async function buyTokens(
  */
 export async function finalizeLaunch(
   launchId: number,
-  onFinish?: (data: any) => void,
+  onFinish?: (data: FinishTxData) => void,
   onCancel?: () => void
 ): Promise<void> {
   try {
@@ -322,7 +321,7 @@ export async function finalizeLaunch(
  */
 export async function claimTokens(
   launchId: number,
-  onFinish?: (data: any) => void,
+  onFinish?: (data: FinishTxData) => void,
   onCancel?: () => void
 ): Promise<void> {
   try {
@@ -347,7 +346,7 @@ export async function claimTokens(
  */
 export async function requestRefund(
   launchId: number,
-  onFinish?: (data: any) => void,
+  onFinish?: (data: FinishTxData) => void,
   onCancel?: () => void
 ): Promise<void> {
   try {
@@ -371,7 +370,7 @@ export async function requestRefund(
  * Helper functions to parse contract responses
  */
 
-function parseLaunchData(data: any, launchId: number): Launch {
+function parseLaunchData(data: Record<string, unknown>, launchId: number): Launch {
   return {
     id: launchId,
     creator: data.creator?.value || '',
@@ -395,7 +394,7 @@ function parseLaunchData(data: any, launchId: number): Launch {
   };
 }
 
-function parseContributionData(data: any, launchId: number, userAddress: string): LaunchContribution {
+function parseContributionData(data: Record<string, unknown>, launchId: number, userAddress: string): LaunchContribution {
   return {
     launchId,
     user: userAddress,
@@ -406,7 +405,7 @@ function parseContributionData(data: any, launchId: number, userAddress: string)
   };
 }
 
-function parseStatsData(data: any, launchId: number): LaunchStats {
+function parseStatsData(data: Record<string, unknown>, launchId: number): LaunchStats {
   return {
     id: launchId,
     totalRaised: BigInt(data['total-raised']?.value || 0),

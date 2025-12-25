@@ -1,9 +1,9 @@
-import { StacksMainnet, StacksTestnet } from '@stacks/network';
+import { STACKS_MAINNET, STACKS_TESTNET, type StacksNetwork } from '@stacks/network';
 
 // Network Configuration
-export const NETWORK = process.env.NEXT_PUBLIC_NETWORK === 'mainnet' 
-  ? new StacksMainnet() 
-  : new StacksTestnet();
+export const NETWORK: StacksNetwork = process.env.NEXT_PUBLIC_NETWORK === 'mainnet'
+  ? STACKS_MAINNET
+  : STACKS_TESTNET;
 
 export const IS_MAINNET = process.env.NEXT_PUBLIC_NETWORK === 'mainnet';
 

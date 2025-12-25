@@ -48,6 +48,17 @@ export function formatBlockNumber(block: number): string {
 }
 
 /**
+ * Format time ago (e.g., "2 hours ago")
+ */
+export function formatTimeAgo(timestamp: number): string {
+  try {
+    return formatDistanceToNow(new Date(timestamp), { addSuffix: true });
+  } catch {
+    return 'Unknown';
+  }
+}
+
+/**
  * Format time remaining from blocks
  * @param blocks - Number of blocks remaining
  * @param blocksPerMinute - Blocks per minute (default: 0.1, ~10 min/block)
