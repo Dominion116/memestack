@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppConfig, UserSession, connect } from '@stacks/connect';
+import { AppConfig, UserSession, authenticate } from '@stacks/connect';
 import type { WalletState } from '@/lib/types';
 import { getAccountBalance } from '@/lib/stacks/contract';
 import { IS_MAINNET, APP_NAME } from '@/lib/stacks/constants';
@@ -48,26 +48,33 @@ export const useAppStore = create<AppState>()(
         try {
           set({ isLoading: true });
           
-          await connect({
+          authenticate({
             appDetails: {
               name: APP_NAME,
               icon: window.location.origin + '/logo.png',
             },
             redirectTo: '/',
-            onFinish: async () => {
-              if (userSession.isUserSignedIn()) {
-                const userData = userSession.loadUserData();
-                const address = userData.profile.stxAddress[IS_MAINNET ? 'mainnet' : 'testnet'];
-                
-                // Fetch balance
-                const balance = await getAccountBalance(address);
-                
-                set({
-                  address,
-                  balance,
-                  isConnected: true,
-                  isLoading: false,
-                });
+            onFinish: async (payload) => {
+              try {
+                if (userSession.isUserSignedIn()) {
+                  const userData = userSession.loadUserData();
+                  const address = userData.profile.stxAddress[IS_MAINNET ? 'mainnet' : 'testnet'];
+                  
+                  // Fetch balance
+                  const balance = await getAccountBalance(address);
+                  
+                  set({
+                    address,
+                    balance,
+                    isConnected: true,
+                    isLoading: false,
+                  });
+                } else {
+                  set({ isLoading: false });
+                }
+              } catch (error) {
+                console.error('Error in onFinish:', error);
+                set({ isLoading: false });
               }
             },
             onCancel: () => {
@@ -75,6 +82,9 @@ export const useAppStore = create<AppState>()(
             },
             userSession,
           });
+          
+          // Clear loading state after popup opens
+          set({ isLoading: false });
         } catch (error) {
           console.error('Failed to connect wallet:', error);
           set({ isLoading: false });
