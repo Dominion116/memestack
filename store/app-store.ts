@@ -1,14 +1,31 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppConfig, UserSession, authenticate } from '@stacks/connect';
+import Client from '@walletconnect/sign-client';
+import QRCodeModal from '@walletconnect/qrcode-modal';
 import type { WalletState } from '@/lib/types';
 import { getAccountBalance } from '@/lib/stacks/contract';
 import { IS_MAINNET, APP_NAME } from '@/lib/stacks/constants';
 
+// Enable BigInt JSON serialization
+if (typeof BigInt !== 'undefined') {
+  (BigInt.prototype as any).toJSON = function () {
+    return this.toString();
+  };
+}
+
+// Chain IDs for Stacks
+const STACKS_MAINNET_CHAIN = 'stacks:1';
+const STACKS_TESTNET_CHAIN = 'stacks:2147483648';
+
 interface AppState extends WalletState {
+  // WalletConnect state
+  client: typeof Client | null;
+  session: any | null;
+  
   // Wallet methods
+  initializeWalletConnect: () => Promise<void>;
   connectWallet: () => Promise<void>;
-  disconnectWallet: () => void;
+  disconnectWallet: () => Promise<void>;
   refreshBalance: () => Promise<void>;
   
   // UI state
@@ -25,9 +42,6 @@ interface AppState extends WalletState {
   removePendingTx: (txId: string) => void;
 }
 
-// Initialize Stacks authentication
-const appConfig = new AppConfig(['store_write', 'publish_data']);
-const userSession = new UserSession({ appConfig });
 
 export const useAppStore = create<AppState>()(
   persist(
@@ -38,63 +52,125 @@ export const useAppStore = create<AppState>()(
       isConnected: false,
       network: IS_MAINNET ? 'mainnet' : 'testnet',
       
+      // WalletConnect state
+      client: null,
+      session: null,
+      
       // UI state
       theme: 'dark',
       isLoading: false,
       pendingTxs: [],
 
-      // Connect wallet using Stacks Connect
+      // Initialize WalletConnect client
+      initializeWalletConnect: async () => {
+        const { client } = get();
+        if (client) return; // Already initialized
+
+        try {
+          const wcClient = await Client.init({
+            logger: 'error',
+            relayUrl: 'wss://relay.walletconnect.com',
+            projectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || 'your-project-id',
+            metadata: {
+              name: APP_NAME,
+              description: 'Fair launch platform for memecoins on Stacks blockchain',
+              url: typeof window !== 'undefined' ? window.location.origin : 'https://memestack.io',
+              icons: [typeof window !== 'undefined' ? window.location.origin + '/logo.png' : 'https://memestack.io/logo.png'],
+            },
+          });
+
+          set({ client: wcClient });
+        } catch (error) {
+          console.error('Failed to initialize WalletConnect:', error);
+        }
+      },
+
+      // Connect wallet using WalletConnect
       connectWallet: async () => {
         try {
           set({ isLoading: true });
           
-          authenticate({
-            appDetails: {
-              name: APP_NAME,
-              icon: window.location.origin + '/logo.png',
-            },
-            redirectTo: '/',
-            onFinish: async (payload) => {
-              try {
-                if (userSession.isUserSignedIn()) {
-                  const userData = userSession.loadUserData();
-                  const address = userData.profile.stxAddress[IS_MAINNET ? 'mainnet' : 'testnet'];
-                  
-                  // Fetch balance
-                  const balance = await getAccountBalance(address);
-                  
-                  set({
-                    address,
-                    balance,
-                    isConnected: true,
-                    isLoading: false,
-                  });
-                } else {
-                  set({ isLoading: false });
-                }
-              } catch (error) {
-                console.error('Error in onFinish:', error);
-                set({ isLoading: false });
-              }
-            },
-            onCancel: () => {
-              set({ isLoading: false });
-            },
-            userSession,
-          });
+          let { client } = get();
           
-          // Clear loading state after popup opens
-          set({ isLoading: false });
+          // Initialize client if not already done
+          if (!client) {
+            await get().initializeWalletConnect();
+            client = get().client;
+          }
+
+          if (!client) {
+            throw new Error('Failed to initialize WalletConnect client');
+          }
+
+          const chain = IS_MAINNET ? STACKS_MAINNET_CHAIN : STACKS_TESTNET_CHAIN;
+
+          const { uri, approval } = await client.connect({
+            pairingTopic: undefined,
+            optionalNamespaces: {
+              stacks: {
+                methods: [
+                  'stacks_signMessage',
+                  'stacks_stxTransfer',
+                  'stacks_contractCall',
+                  'stacks_contractDeploy',
+                ],
+                chains: [chain],
+                events: [],
+              },
+            },
+          });
+
+          if (uri) {
+            QRCodeModal.open(uri, () => {
+              console.log('QR Code Modal closed');
+              set({ isLoading: false });
+            });
+          }
+
+          const session = await approval();
+          
+          // Extract address from session
+          const address = session.namespaces.stacks.accounts[0].split(':')[2];
+          
+          // Fetch balance
+          const balance = await getAccountBalance(address);
+          
+          set({
+            session,
+            address,
+            balance,
+            isConnected: true,
+            isLoading: false,
+          });
+
+          QRCodeModal.close();
         } catch (error) {
           console.error('Failed to connect wallet:', error);
           set({ isLoading: false });
+          QRCodeModal.close();
         }
       },
 
       // Disconnect wallet
-      disconnectWallet: () => {
-        userSession.signUserOut();
+      disconnectWallet: async () => {
+        const { client, session } = get();
+        
+        try {
+          if (client && session) {
+            await client.disconnect({
+              topic: session.topic,
+              reason: {
+                code: 6000,
+                message: 'User disconnected',
+              },
+            });
+          }
+        } catch (error) {
+          console.error('Error disconnecting:', error);
+        }
+
         set({
+          session: null,
           address: null,
           balance: BigInt(0),
           isConnected: false,
@@ -138,7 +214,8 @@ export const useAppStore = create<AppState>()(
       name: 'memestack-storage',
       partialize: (state) => ({
         theme: state.theme,
-        // Don't persist sensitive wallet data
+        session: state.session, // Persist session for reconnection
+        // Don't persist client or sensitive data
       }),
     }
   )
@@ -146,19 +223,32 @@ export const useAppStore = create<AppState>()(
 
 // Auto-restore wallet connection on app load
 if (typeof window !== 'undefined') {
-  if (userSession.isUserSignedIn()) {
-    const userData = userSession.loadUserData();
-    const address = userData.profile.stxAddress[IS_MAINNET ? 'mainnet' : 'testnet'];
+  const store = useAppStore.getState();
+  
+  // Initialize WalletConnect client
+  store.initializeWalletConnect().then(() => {
+    const { session, client } = useAppStore.getState();
     
-    getAccountBalance(address).then((balance) => {
-      useAppStore.setState({
-        address,
-        balance,
-        isConnected: true,
-      });
-    });
-  }
+    // Restore session if exists
+    if (session && client) {
+      const address = session.namespaces?.stacks?.accounts?.[0]?.split(':')[2];
+      
+      if (address) {
+        getAccountBalance(address).then((balance) => {
+          useAppStore.setState({
+            address,
+            balance,
+            isConnected: true,
+          });
+        }).catch((error) => {
+          console.error('Failed to restore wallet connection:', error);
+          useAppStore.setState({
+            session: null,
+            address: null,
+            isConnected: false,
+          });
+        });
+      }
+    }
+  });
 }
-
-// Export userSession for use in components
-export { userSession };
