@@ -115,10 +115,16 @@ export function LaunchCard({ launch }: LaunchCardProps) {
         <Button asChild className="w-full">
           <Link href={`/launches/${launch.id}`}>
             View Details
-            <ArrowRight className="ml-2 h-4 w-4" />
+            <motion.div
+              animate={{ x: isHovered ? 4 : 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </motion.div>
           </Link>
         </Button>
       </CardFooter>
     </Card>
+    </motion.div>
   );
 }
