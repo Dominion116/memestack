@@ -123,6 +123,13 @@
   }
 }
 
+/* Center all containers */
+.container {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  max-width: 1280px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
