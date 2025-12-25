@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { AppConfig, UserSession, showConnect } from '@stacks/connect';
+import { AppConfig, UserSession, connect } from '@stacks/connect';
 import type { WalletState } from '@/lib/types';
 import { getAccountBalance } from '@/lib/stacks/contract';
 import { IS_MAINNET, APP_NAME } from '@/lib/stacks/constants';
@@ -48,10 +48,10 @@ export const useAppStore = create<AppState>()(
         try {
           set({ isLoading: true });
           
-          showConnect({
+          await connect({
             appDetails: {
               name: APP_NAME,
-              icon: '/logo.png', // Add your logo
+              icon: window.location.origin + '/logo.png',
             },
             redirectTo: '/',
             onFinish: async () => {
