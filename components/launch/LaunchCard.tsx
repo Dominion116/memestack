@@ -34,19 +34,19 @@ export function LaunchCard({ launch }: LaunchCardProps) {
 
   return (
     <Card className="flex flex-col h-full hover:shadow-lg transition-shadow">
-      <CardHeader>
-        <div className="flex items-start justify-between mb-2">
-          <div>
-            <CardTitle className="text-xl">{launch.tokenName}</CardTitle>
-            <CardDescription className="font-mono text-sm mt-1">
+      <CardHeader className="space-y-3">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <CardTitle className="text-lg sm:text-xl truncate">{launch.tokenName}</CardTitle>
+            <CardDescription className="font-mono text-xs sm:text-sm mt-1">
               ${launch.tokenSymbol}
             </CardDescription>
           </div>
-          <Badge variant={status.variant}>{status.label}</Badge>
+          <Badge variant={status.variant} className="shrink-0 text-xs">{status.label}</Badge>
         </div>
         <div className="flex items-center text-xs text-muted-foreground">
-          <Users className="h-3 w-3 mr-1" />
-          <span>by {formatAddress(launch.creator)}</span>
+          <Users className="h-3 w-3 mr-1 shrink-0" />
+          <span className="truncate">by {formatAddress(launch.creator)}</span>
         </div>
       </CardHeader>
 

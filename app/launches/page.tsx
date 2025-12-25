@@ -32,16 +32,16 @@ function LaunchesPageContent() {
   }, [launches, searchQuery]);
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-6 sm:py-8 space-y-6 sm:space-y-8 px-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Browse Launches</h1>
-          <p className="text-muted-foreground mt-1">
+        <div className="space-y-1">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Browse Launches</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Discover and participate in token launches
           </p>
         </div>
-        <Button asChild size="lg">
+        <Button asChild size="lg" className="w-full sm:w-auto">
           <Link href="/create">
             <Plus className="mr-2 h-4 w-4" />
             Create Launch

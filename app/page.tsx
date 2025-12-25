@@ -128,17 +128,17 @@ export default function HomePage() {
             transition={{ duration: 0.5 }}
             className="mx-auto max-w-4xl text-center"
           >
-            <Badge variant="secondary" className="mb-4">
+            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
               Built on Stacks Blockchain
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl md:text-7xl mb-6">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
               Launch Your Memecoin on{' '}
               <span className="gradient-text">Stacks</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed px-4">
               Fair launches, no presale, community-first. Create and participate in transparent token launches with built-in refund protection.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
               <Button size="lg" onClick={handleGetStarted} className="text-lg">
                 {isConnected ? 'View Launches' : 'Connect Wallet to Start'}
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -153,19 +153,19 @@ export default function HomePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-8"
+              className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 px-4"
             >
-              <div className="text-center">
-                <div className="text-4xl font-bold gradient-text">150+</div>
-                <div className="text-sm text-muted-foreground mt-1">Total Launches</div>
+              <div className="text-center p-4">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">150+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground mt-2">Total Launches</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold gradient-text">50K+</div>
-                <div className="text-sm text-muted-foreground mt-1">STX Raised</div>
+              <div className="text-center p-4">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">50K+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground mt-2">STX Raised</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold gradient-text">2.5K+</div>
-                <div className="text-sm text-muted-foreground mt-1">Active Users</div>
+              <div className="text-center p-4">
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">2.5K+</div>
+                <div className="text-xs sm:text-sm text-muted-foreground mt-2">Active Users</div>
               </div>
             </motion.div>
           </motion.div>
@@ -173,17 +173,17 @@ export default function HomePage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-24 md:py-32">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section id="how-it-works" className="py-16 sm:py-20 md:py-24 lg:py-32">
+        <div className="container px-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               How It Works
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Launch your token in four simple steps
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {howItWorks.map((item, index) => (
               <motion.div
                 key={item.step}
@@ -212,17 +212,17 @@ export default function HomePage() {
       </section>
 
       {/* Features Grid Section */}
-      <section className="py-24 md:py-32 bg-muted/50">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-muted/50">
+        <div className="container px-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Why Choose Memestack
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
               Built with fairness, transparency, and community in mind
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -249,23 +249,23 @@ export default function HomePage() {
       </section>
 
       {/* FAQ Section */}
-      <section id="faq" className="py-24 md:py-32">
-        <div className="container max-w-3xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section id="faq" className="py-16 sm:py-20 md:py-24 lg:py-32">
+        <div className="container max-w-3xl px-4">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-base sm:text-lg text-muted-foreground px-4">
               Everything you need to know about Memestack
             </p>
           </div>
-          <Accordion type="single" collapsible className="w-full">
+          <Accordion type="single" collapsible className="w-full space-y-2">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger className="text-left">
+                <AccordionTrigger className="text-left text-sm sm:text-base font-medium py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
+                <AccordionContent className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -275,16 +275,16 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 md:py-32 bg-muted/50">
-        <div className="container">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-muted/50">
+        <div className="container px-4">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
               Ready to Launch Your Token?
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 px-4">
               Join hundreds of projects launching fair and transparent token sales on Stacks
             </p>
-            <Button size="lg" onClick={handleGetStarted} className="text-lg">
+            <Button size="lg" onClick={handleGetStarted} className="text-base sm:text-lg w-full sm:w-auto">
               {isConnected ? 'Create Launch' : 'Connect Wallet'}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>

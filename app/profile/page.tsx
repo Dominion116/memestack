@@ -94,11 +94,11 @@ function ProfileContent() {
   };
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-6 sm:py-8 space-y-6 sm:space-y-8 px-4">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Profile & Settings</h1>
-        <p className="text-muted-foreground mt-1">
+      <div className="space-y-1">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Profile & Settings</h1>
+        <p className="text-sm sm:text-base text-muted-foreground">
           Manage your account and preferences
         </p>
       </div>
@@ -106,23 +106,24 @@ function ProfileContent() {
       {/* Wallet Info Card */}
       <Card>
         <CardHeader>
-          <CardTitle>Wallet Information</CardTitle>
-          <CardDescription>Your connected Stacks wallet details</CardDescription>
+          <CardTitle className="text-lg sm:text-xl">Wallet Information</CardTitle>
+          <CardDescription className="text-sm">Your connected Stacks wallet details</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           {/* Address */}
           <div className="space-y-2">
-            <label className="text-sm font-medium">Wallet Address</label>
-            <div className="flex items-center gap-2">
-              <code className="flex-1 bg-muted px-3 py-2 rounded-md text-sm font-mono">
+            <label className="text-xs sm:text-sm font-medium">Wallet Address</label>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              <code className="flex-1 bg-muted px-3 py-2 rounded-md text-xs sm:text-sm font-mono overflow-x-auto break-all">
                 {address}
               </code>
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={copyAddress}
-                className="shrink-0"
-              >
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={copyAddress}
+                  className="shrink-0"
+                >
                 {copied ? (
                   <Check className="h-4 w-4 text-green-500" />
                 ) : (
@@ -143,23 +144,24 @@ function ProfileContent() {
                   <ExternalLink className="h-4 w-4" />
                 </a>
               </Button>
+              </div>
             </div>
           </div>
 
           {/* Balance */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">STX Balance</label>
+              <label className="text-xs sm:text-sm font-medium">STX Balance</label>
               <div className="bg-muted px-4 py-3 rounded-md">
-                <p className="text-2xl font-bold">{formatSTX(Number(balance))}</p>
+                <p className="text-xl sm:text-2xl font-bold">{formatSTX(Number(balance))}</p>
                 <p className="text-xs text-muted-foreground">STX</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Network</label>
+              <label className="text-xs sm:text-sm font-medium">Network</label>
               <div className="bg-muted px-4 py-3 rounded-md">
-                <p className="text-2xl font-bold capitalize">{process.env.NEXT_PUBLIC_NETWORK || 'testnet'}</p>
+                <p className="text-xl sm:text-2xl font-bold capitalize">{process.env.NEXT_PUBLIC_NETWORK || 'testnet'}</p>
                 <p className="text-xs text-muted-foreground">Stacks Network</p>
               </div>
             </div>
@@ -182,22 +184,40 @@ function ProfileContent() {
       {/* Theme Settings */}
       <Card>
         <CardHeader>
-          <CardTitle>Appearance</CardTitle>
-          <CardDescription>Customize how Memestack looks</CardDescription>
+          <CardTitle className="text-lg sm:text-xl">Appearance</CardTitle>
+          <CardDescription className="text-sm">Customize how Memestack looks</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Theme</label>
-            <div className="grid grid-cols-3 gap-3">
+            <label className="text-xs sm:text-sm font-medium">Theme</label>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               <Button
                 variant={theme === 'light' ? 'default' : 'outline'}
                 onClick={() => setTheme('light')}
-                className="w-full"
+                className="w-full text-xs sm:text-sm"
+                size="sm"
               >
-                <Sun className="mr-2 h-4 w-4" />
-                Light
+                <Sun className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Light</span>
               </Button>
               <Button
+                variant={theme === 'dark' ? 'default' : 'outline'}
+                onClick={() => setTheme('dark')}
+                className="w-full text-xs sm:text-sm"
+                size="sm"
+              >
+                <Moon className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">Dark</span>
+              </Button>
+              <Button
+                variant={theme === 'system' ? 'default' : 'outline'}
+                onClick={() => setTheme('system')}
+                className="w-full text-xs sm:text-sm"
+                size="sm"
+              >
+                <Monitor className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+                <span className="hidden xs:inline">System</span>
+              </Button>
                 variant={theme === 'dark' ? 'default' : 'outline'}
                 onClick={() => setTheme('dark')}
                 className="w-full"

@@ -120,16 +120,16 @@ function DashboardContent() {
   };
 
   return (
-    <div className="container py-8 space-y-8">
+    <div className="container py-6 sm:py-8 space-y-6 sm:space-y-8 px-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">
+        <div className="space-y-1">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-sm sm:text-base text-muted-foreground">
             Manage your launches and investments
           </p>
         </div>
-        <Button asChild size="lg">
+        <Button asChild size="lg" className="w-full sm:w-auto">
           <Link href="/create">
             <Plus className="mr-2 h-4 w-4" />
             Create Launch
@@ -138,15 +138,15 @@ function DashboardContent() {
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Launches</CardTitle>
+            <CardTitle className="text-xs sm:text-sm font-medium">Total Launches</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{userLaunches.length}</div>
-            <p className="text-xs text-muted-foreground">Created by you</p>
+            <div className="text-xl sm:text-2xl font-bold">{userLaunches.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">Created by you</p>
           </CardContent>
         </Card>
 
