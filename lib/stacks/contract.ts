@@ -24,6 +24,12 @@ import type {
 } from '../types';
 import { logError } from '../utils/errors';
 
+// Type for transaction finish callback data
+type FinishTxData = {
+  txId: string;
+  txRaw: string;
+};
+
 /**
  * Read-only contract calls
  */
@@ -371,49 +377,55 @@ export async function requestRefund(
  */
 
 function parseLaunchData(data: Record<string, unknown>, launchId: number): Launch {
+  // Type assertion for Clarity value structure
+  const d = data as Record<string, { value: unknown }>;
   return {
     id: launchId,
-    creator: data.creator?.value || '',
-    tokenName: data['token-name']?.value || '',
-    tokenSymbol: data['token-symbol']?.value || '',
-    tokenUri: data['token-uri']?.value || '',
-    totalSupply: BigInt(data['total-supply']?.value || 0),
-    pricePerToken: BigInt(data['price-per-token']?.value || 0),
-    softCap: BigInt(data['soft-cap']?.value || 0),
-    hardCap: BigInt(data['hard-cap']?.value || 0),
-    minPurchase: BigInt(data['min-purchase']?.value || 0),
-    maxPurchase: BigInt(data['max-purchase']?.value || 0),
-    startBlock: Number(data['start-block']?.value || 0),
-    endBlock: Number(data['end-block']?.value || 0),
-    durationBlocks: Number(data['duration-blocks']?.value || 0),
-    totalRaised: BigInt(data['total-raised']?.value || 0),
-    totalTokensSold: BigInt(data['total-tokens-sold']?.value || 0),
-    isFinalized: data['is-finalized']?.value || false,
-    isSuccessful: data['is-successful']?.value || false,
+    creator: (d.creator?.value as string) || '',
+    tokenName: (d['token-name']?.value as string) || '',
+    tokenSymbol: (d['token-symbol']?.value as string) || '',
+    tokenUri: (d['token-uri']?.value as string) || '',
+    totalSupply: BigInt((d['total-supply']?.value as number) || 0),
+    pricePerToken: BigInt((d['price-per-token']?.value as number) || 0),
+    softCap: BigInt((d['soft-cap']?.value as number) || 0),
+    hardCap: BigInt((d['hard-cap']?.value as number) || 0),
+    minPurchase: BigInt((d['min-purchase']?.value as number) || 0),
+    maxPurchase: BigInt((d['max-purchase']?.value as number) || 0),
+    startBlock: Number((d['start-block']?.value as number) || 0),
+    endBlock: Number((d['end-block']?.value as number) || 0),
+    durationBlocks: Number((d['duration-blocks']?.value as number) || 0),
+    totalRaised: BigInt((d['total-raised']?.value as number) || 0),
+    totalTokensSold: BigInt((d['total-tokens-sold']?.value as number) || 0),
+    isFinalized: (d['is-finalized']?.value as boolean) || false,
+    isSuccessful: (d['is-successful']?.value as boolean) || false,
     createdAt: Date.now(), // This should come from blockchain data
   };
 }
 
 function parseContributionData(data: Record<string, unknown>, launchId: number, userAddress: string): LaunchContribution {
+  // Type assertion for Clarity value structure
+  const d = data as Record<string, { value: unknown }>;
   return {
     launchId,
     user: userAddress,
-    stxContributed: BigInt(data['stx-contributed']?.value || 0),
-    tokensAllocated: BigInt(data['tokens-allocated']?.value || 0),
-    hasClaimed: data['has-claimed']?.value || false,
-    hasRefunded: data['has-refunded']?.value || false,
+    stxContributed: BigInt((d['stx-contributed']?.value as number) || 0),
+    tokensAllocated: BigInt((d['tokens-allocated']?.value as number) || 0),
+    hasClaimed: (d['has-claimed']?.value as boolean) || false,
+    hasRefunded: (d['has-refunded']?.value as boolean) || false,
   };
 }
 
 function parseStatsData(data: Record<string, unknown>, launchId: number): LaunchStats {
+  // Type assertion for Clarity value structure
+  const d = data as Record<string, { value: unknown }>;
   return {
     id: launchId,
-    totalRaised: BigInt(data['total-raised']?.value || 0),
-    totalTokensSold: BigInt(data['total-tokens-sold']?.value || 0),
-    totalContributors: Number(data['total-contributors']?.value || 0),
-    isActive: data['is-active']?.value || false,
-    progressPercentage: Number(data['progress-percentage']?.value || 0),
-    blocksRemaining: Number(data['blocks-remaining']?.value || 0),
+    totalRaised: BigInt((d['total-raised']?.value as number) || 0),
+    totalTokensSold: BigInt((d['total-tokens-sold']?.value as number) || 0),
+    totalContributors: Number((d['total-contributors']?.value as number) || 0),
+    isActive: (d['is-active']?.value as boolean) || false,
+    progressPercentage: Number((d['progress-percentage']?.value as number) || 0),
+    blocksRemaining: Number((d['blocks-remaining']?.value as number) || 0),
     timeRemaining: '',
   };
 }

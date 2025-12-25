@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import type { Launch } from '@/lib/types';
 import { formatSTX, formatAddress, formatPercentage, formatBlocksToTime } from '@/lib/utils/format';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 interface LaunchCardProps {
   launch: Launch;

@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import type { Launch } from '@/lib/types';
 import { formatSTX, formatPercentage, formatBlocksToTime } from '@/lib/utils/format';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 interface LaunchProgressProps {
   launch: Launch;

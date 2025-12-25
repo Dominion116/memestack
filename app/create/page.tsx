@@ -21,7 +21,7 @@ import { useContractCall } from '@/lib/hooks/useContractCall';
 import { createLaunchSchema, type CreateLaunchFormData } from '@/lib/utils/validation';
 import { parseSTXToMicroSTX, formatSTX, formatBlocksToTime } from '@/lib/utils/format';
 import { BLOCKS_PER_DAY, MICRO_STX_PER_STX } from '@/lib/stacks/constants';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 const DURATION_PRESETS = [
   { label: '1 Day', blocks: BLOCKS_PER_DAY },

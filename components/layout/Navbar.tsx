@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { WalletButton } from '@/components/wallet/WalletButton';
 import { IS_MAINNET } from '@/lib/stacks/constants';
-import { cn } from '@/lib/utils';
+import { cn } from '../../lib/utils';
 
 const navLinks = [
   { href: '/launches', label: 'Launches' },
