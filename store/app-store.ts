@@ -111,6 +111,7 @@ export const useAppStore = create<AppState>()(
 
           const chain = IS_MAINNET ? STACKS_MAINNET_CHAIN : STACKS_TESTNET_CHAIN;
 
+
           const { uri, approval } = await client.connect({
             pairingTopic: undefined,
             optionalNamespaces: {
@@ -127,11 +128,18 @@ export const useAppStore = create<AppState>()(
             },
           });
 
+          // Xverse deep link for mobile
+          const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
           if (uri) {
-            QRCodeModal.open(uri, () => {
-              console.log('QR Code Modal closed');
-              set({ isLoading: false });
-            });
+            if (isMobile) {
+              const xverseDeepLink = `xverse://wc?uri=${encodeURIComponent(uri)}`;
+              window.location.href = xverseDeepLink;
+            } else {
+              QRCodeModal.open(uri, () => {
+                console.log('QR Code Modal closed');
+                set({ isLoading: false });
+              });
+            }
           }
 
           const session = await approval();

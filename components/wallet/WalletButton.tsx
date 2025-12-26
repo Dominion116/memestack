@@ -19,39 +19,34 @@ export function WalletButton() {
   const router = useRouter();
 
   if (!isConnected) {
+    // Detect mobile for Xverse deep link
+    const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     return (
       <div className="flex flex-col gap-2 items-stretch">
         <Button onClick={connectWallet} disabled={isLoading} size="sm">
           <Wallet className="mr-2 h-4 w-4" />
           {isLoading ? 'Connecting...' : 'Connect Wallet'}
         </Button>
-        <div className="text-xs text-muted-foreground text-center">
-          <span>Having trouble connecting?</span>
-          <br />
-          <span>
-            Make sure you have the latest <b>Xverse</b> or <b>Leather</b> wallet app on your phone.
-            <br />
-            <b>Scan the QR code</b> with your wallet's "Scan QR" feature.
-            <br />
+        {isMobile && (
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="mt-1"
+          >
             <a
-              href="https://www.xverse.app/download"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-primary"
+              href="#"
+              onClick={async (e) => {
+                e.preventDefault();
+                // Call connectWallet to trigger deep link
+                await connectWallet();
+              }}
             >
-              Download Xverse
-            </a>{' '}
-            |
-            <a
-              href="https://leather.io/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline hover:text-primary"
-            >
-              Download Leather
+              Connect with Xverse (Mobile)
             </a>
-          </span>
-        </div>
+          </Button>
+        )}
+        {/* Removed instructional text for cleaner UI */}
       </div>
     );
   }
