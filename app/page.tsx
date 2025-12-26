@@ -11,7 +11,7 @@ import { WalletModal } from '@/components/wallet/WalletModal';
 import { useWallet } from '@/lib/hooks/useWallet';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Hero7 } from '@/components/hero7';
+import Hero from '@/components/hero';
 
 const features = [
   {
@@ -120,28 +120,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      {/* Hero Section (Rebranded) */}
-      <Hero7
-        heading="Launch Your Memecoin on Stacks"
-        description="Fair launches, no presale, community-first. Create and participate in transparent token launches with built-in refund protection."
-        button={{
-          text: isConnected ? 'View Launches' : 'Connect Wallet to Start',
-          url: isConnected ? '/launches' : '#',
-          className: 'text-lg',
-        }}
-        reviews={{
-          count: 150,
-          rating: 5.0,
-          avatars: [
-            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp', alt: 'User 1' },
-            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp', alt: 'User 2' },
-            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-3.webp', alt: 'User 3' },
-            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp', alt: 'User 4' },
-            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-5.webp', alt: 'User 5' },
-          ],
-        }}
-        className="border-b" style={{ background: 'var(--background)' }}
-      />
+      {/* Hero Section (Memestack) */}
+      <Hero />
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-16 sm:py-20 md:py-24 lg:py-32">

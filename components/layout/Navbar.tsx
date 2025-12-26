@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Rocket, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { TweakcnIcon } from '@/components/ui/tweakcn-icon';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,12 +25,9 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-            <Rocket className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Memestack
+        <Link href="/" className="flex items-center group">
+          <span className="text-2xl font-extrabold tracking-tight text-foreground font-sans" style={{ letterSpacing: '-0.02em' }}>
+            memestack
           </span>
         </Link>
 
