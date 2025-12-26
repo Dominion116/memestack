@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-6 border-b-0 bg-background relative overflow-hidden" style={{ borderBottom: '1px solid transparent' }}>
+    <div className="min-h-[100vh] flex items-center justify-center px-6 border-b-0 bg-background relative overflow-hidden" style={{ borderBottom: '1px solid transparent' }}>
       {/* Dot pattern only inside hero */}
       <div className="absolute inset-0 pointer-events-none z-0">
         <BackgroundPattern />
