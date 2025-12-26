@@ -5,9 +5,11 @@ import QRCodeModal from '@walletconnect/qrcode-modal';
 import type { WalletState } from '@/lib/types';
 import { getAccountBalance } from '@/lib/stacks/contract';
 import { IS_MAINNET, APP_NAME } from '@/lib/stacks/constants';
+import type { SessionTypes } from '@walletconnect/types';
 
 // Enable BigInt JSON serialization
 if (typeof BigInt !== 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (BigInt.prototype as any).toJSON = function () {
     return this.toString();
   };
@@ -19,8 +21,8 @@ const STACKS_TESTNET_CHAIN = 'stacks:2147483648';
 
 interface AppState extends WalletState {
   // WalletConnect state
-  client: typeof Client | null;
-  session: any | null;
+  client: Client | null;
+  session: SessionTypes.Struct | null;
   
   // Wallet methods
   initializeWalletConnect: () => Promise<void>;
