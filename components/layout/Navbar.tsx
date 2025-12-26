@@ -21,7 +21,7 @@ export function Navbar() {
 			<div className="h-full flex items-center justify-between mx-auto px-4">
 				{/* Logo */}
 				<Link href="/" className="flex items-center group">
-					<span className="text-2xl font-extrabold tracking-tight text-foreground font-sans" style={{ letterSpacing: '-0.02em' }}>
+					<span className="text-lg font-medium tracking-tight text-foreground font-sans" style={{ letterSpacing: '-0.02em', fontFamily: 'Inter, sans-serif' }}>
 						memestack
 					</span>
 				</Link>
@@ -44,9 +44,6 @@ export function Navbar() {
 
 				{/* Right Side: Network Badge + Wallet Button */}
 				<div className="flex items-center gap-3">
-					<Badge variant={IS_MAINNET ? "default" : "secondary"} className="hidden sm:inline-flex text-xs">
-						{IS_MAINNET ? "Mainnet" : "Testnet"}
-					</Badge>
 					<div className="hidden md:block">
 						<WalletButton />
 					</div>
