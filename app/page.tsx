@@ -11,6 +11,7 @@ import { WalletModal } from '@/components/wallet/WalletModal';
 import { useWallet } from '@/lib/hooks/useWallet';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import { Hero7 } from '@/components/hero7';
 
 const features = [
   {
@@ -116,61 +117,31 @@ export default function HomePage() {
     }
   };
 
+
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-orange-500/10 animate-gradient" />
-        <div className="container relative py-24 md:py-32 lg:py-40">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mx-auto max-w-4xl text-center"
-          >
-            <Badge variant="secondary" className="mb-4 text-xs sm:text-sm">
-              Built on Stacks Blockchain
-            </Badge>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight">
-              Launch Your Memecoin on{' '}
-              <span className="gradient-text">Stacks</span>
-            </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed px-4">
-              Fair launches, no presale, community-first. Create and participate in transparent token launches with built-in refund protection.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
-              <Button size="lg" onClick={handleGetStarted} className="text-lg">
-                {isConnected ? 'View Launches' : 'Connect Wallet to Start'}
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg">
-                <Link href="/#how-it-works">Learn How It Works</Link>
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-12 sm:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 px-4"
-            >
-              <div className="text-center p-4">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">150+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground mt-2">Total Launches</div>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">50K+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground mt-2">STX Raised</div>
-              </div>
-              <div className="text-center p-4">
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text">2.5K+</div>
-                <div className="text-xs sm:text-sm text-muted-foreground mt-2">Active Users</div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Hero Section (Rebranded) */}
+      <Hero7
+        heading="Launch Your Memecoin on Stacks"
+        description="Fair launches, no presale, community-first. Create and participate in transparent token launches with built-in refund protection."
+        button={{
+          text: isConnected ? 'View Launches' : 'Connect Wallet to Start',
+          url: isConnected ? '/launches' : '#',
+          className: 'text-lg',
+        }}
+        reviews={{
+          count: 150,
+          rating: 5.0,
+          avatars: [
+            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-1.webp', alt: 'User 1' },
+            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-2.webp', alt: 'User 2' },
+            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-3.webp', alt: 'User 3' },
+            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-4.webp', alt: 'User 4' },
+            { src: 'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/avatar-5.webp', alt: 'User 5' },
+          ],
+        }}
+        className="border-b" style={{ background: 'var(--background)' }}
+      />
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-16 sm:py-20 md:py-24 lg:py-32">
