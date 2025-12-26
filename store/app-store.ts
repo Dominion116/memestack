@@ -104,6 +104,11 @@ export const useAppStore = create<AppState>()(
             throw new Error('Failed to initialize WalletConnect client');
           }
 
+          // Defensive: check for WalletConnect project ID
+          if (!process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID === 'your-project-id-here') {
+            throw new Error('WalletConnect Project ID is missing or invalid. Please set NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID in your .env.local and restart the dev server.');
+          }
+
           const chain = IS_MAINNET ? STACKS_MAINNET_CHAIN : STACKS_TESTNET_CHAIN;
 
           const { uri, approval } = await client.connect({
@@ -147,7 +152,11 @@ export const useAppStore = create<AppState>()(
 
           QRCodeModal.close();
         } catch (error) {
-          console.error('Failed to connect wallet:', error);
+          if (error instanceof Error) {
+            console.error('Failed to connect wallet:', error.message, error.stack, error);
+          } else {
+            console.error('Failed to connect wallet: Unknown error', error);
+          }
           set({ isLoading: false });
           QRCodeModal.close();
         }

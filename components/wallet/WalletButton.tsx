@@ -20,10 +20,39 @@ export function WalletButton() {
 
   if (!isConnected) {
     return (
-      <Button onClick={connectWallet} disabled={isLoading} size="sm">
-        <Wallet className="mr-2 h-4 w-4" />
-        {isLoading ? 'Connecting...' : 'Connect Wallet'}
-      </Button>
+      <div className="flex flex-col gap-2 items-stretch">
+        <Button onClick={connectWallet} disabled={isLoading} size="sm">
+          <Wallet className="mr-2 h-4 w-4" />
+          {isLoading ? 'Connecting...' : 'Connect Wallet'}
+        </Button>
+        <div className="text-xs text-muted-foreground text-center">
+          <span>Having trouble connecting?</span>
+          <br />
+          <span>
+            Make sure you have the latest <b>Xverse</b> or <b>Leather</b> wallet app on your phone.
+            <br />
+            <b>Scan the QR code</b> with your wallet's "Scan QR" feature.
+            <br />
+            <a
+              href="https://www.xverse.app/download"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary"
+            >
+              Download Xverse
+            </a>{' '}
+            |
+            <a
+              href="https://leather.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary"
+            >
+              Download Leather
+            </a>
+          </span>
+        </div>
+      </div>
     );
   }
 
