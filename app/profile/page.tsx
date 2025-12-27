@@ -218,21 +218,6 @@ function ProfileContent() {
                 <Monitor className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="hidden xs:inline">System</span>
               </Button>
-                variant={theme === 'dark' ? 'default' : 'outline'}
-                onClick={() => setTheme('dark')}
-                className="w-full"
-              >
-                <Moon className="mr-2 h-4 w-4" />
-                Dark
-              </Button>
-              <Button
-                variant={theme === 'system' ? 'default' : 'outline'}
-                onClick={() => setTheme('system')}
-                className="w-full"
-              >
-                <Monitor className="mr-2 h-4 w-4" />
-                System
-              </Button>
             </div>
           </div>
         </CardContent>

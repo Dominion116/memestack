@@ -17,6 +17,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
 import { ProtectedRoute } from '@/components/layout/ProtectedRoute';
+import { WalletButton } from '@/components/wallet/WalletButton';
 import { useContractCall } from '@/lib/hooks/useContractCall';
 import { createLaunchSchema, type CreateLaunchFormData } from '@/lib/utils/validation';
 import { parseSTXToMicroSTX, formatSTX, formatBlocksToTime } from '@/lib/utils/format';

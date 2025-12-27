@@ -11,6 +11,7 @@ import { LaunchCard } from '@/components/launch/LaunchCard';
 import { LaunchFilters } from '@/components/launch/LaunchFilters';
 import { useLaunches } from '@/lib/hooks/useLaunches';
 import type { LaunchFilter, LaunchSortBy } from '@/lib/types';
+import { WalletButton } from '@/components/wallet/WalletButton';
 
 function LaunchesPageContent() {
   const [filter, setFilter] = useState<LaunchFilter>('all');

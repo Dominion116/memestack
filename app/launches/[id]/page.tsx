@@ -15,6 +15,7 @@ import { BuyTokensForm } from '@/components/launch/BuyTokensForm';
 import { LaunchStats } from '@/components/launch/LaunchStats';
 import { useLaunch } from '@/lib/hooks/useLaunches';
 import { useWallet } from '@/lib/hooks/useWallet';
+import { WalletButton } from '@/components/wallet/WalletButton';
 import { useContractCall } from '@/lib/hooks/useContractCall';
 import { formatAddress, formatSTX, formatDate, copyToClipboard } from '@/lib/utils/format';
 import { EXPLORER_URL } from '@/lib/stacks/constants';
