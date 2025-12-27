@@ -180,24 +180,19 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* FAQ Section */}
-			<section id="faq" className="py-16 sm:py-20 md:py-24 lg:py-32">
-				<div className="container max-w-3xl px-4">
-					<div className="text-center mb-12 sm:mb-16">
-						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-							Frequently Asked Questions
-						</h2>
-						<p className="text-base sm:text-lg text-muted-foreground px-4">
-							Everything you need to know about Memestack
-						</p>
-					</div>
-					<Accordion type="single" collapsible className="w-full space-y-2">
+			{/* FAQ Section (shadcnblocks faq-02 style) */}
+			<section id="faq" className="min-h-screen flex items-center justify-center px-6 py-12">
+				<div className="flex flex-col md:flex-row items-start gap-x-12 gap-y-6 w-full max-w-6xl mx-auto">
+					<h2 className="text-4xl lg:text-5xl leading-[1.15]! font-semibold tracking-[-0.035em]">
+						Frequently Asked <br /> Questions
+					</h2>
+					<Accordion type="single" defaultValue="item-0" className="max-w-xl w-full">
 						{faqs.map((faq, index) => (
-							<AccordionItem key={index} value={`item-${index}`}>
-								<AccordionTrigger className="text-left text-sm sm:text-base font-medium py-4">
+							<AccordionItem key={faq.question} value={`item-${index}`}>
+								<AccordionTrigger className="text-left text-lg">
 									{faq.question}
 								</AccordionTrigger>
-								<AccordionContent className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+								<AccordionContent className="text-base text-muted-foreground">
 									{faq.answer}
 								</AccordionContent>
 							</AccordionItem>
@@ -206,20 +201,24 @@ export default function HomePage() {
 				</div>
 			</section>
 
-			{/* CTA Section */}
-			<section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-muted/50">
-				<div className="container px-4">
+			{/* CTA Section - blue grid style */}
+			<section className="py-16 sm:py-20 md:py-24 lg:py-32" style={{ background: 'linear-gradient(180deg, #2196f3 0%, #21cbf3 100%)', position: 'relative', overflow: 'hidden' }}>
+				{/* Grid overlay */}
+				<div aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none', backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+				<div className="container px-4 relative z-10">
 					<div className="mx-auto max-w-2xl text-center">
-						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
+						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4 text-white">
 							Ready to Launch Your Token?
 						</h2>
-						<p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 px-4">
+						<p className="text-base sm:text-lg text-blue-100 mb-6 sm:mb-8 px-4">
 							Join hundreds of projects launching fair and transparent token sales on Stacks
 						</p>
-						<Button size="lg" onClick={handleGetStarted} className="text-base sm:text-lg w-full sm:w-auto">
-							{isConnected ? 'Create Launch' : 'Connect Wallet'}
-							<ArrowRight className="ml-2 h-5 w-5" />
-						</Button>
+						<div className="flex flex-col sm:flex-row gap-4 justify-center">
+							<Button size="lg" onClick={handleGetStarted} className="text-base sm:text-lg w-full sm:w-auto bg-white text-blue-900 hover:bg-blue-50 font-semibold rounded-full px-8 py-2 shadow-md">
+								{isConnected ? 'Create Launch' : 'Connect Wallet'}
+								<ArrowRight className="ml-2 h-5 w-5" />
+							</Button>
+						</div>
 					</div>
 				</div>
 			</section>
