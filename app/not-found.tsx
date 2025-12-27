@@ -1,19 +1,13 @@
-import Link from 'next/link';
-import { Rocket } from 'lucide-react';
-
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4">
-      <div className="flex flex-col items-center">
-        <Rocket className="h-12 w-12 text-primary mb-4" />
-        <h1 className="text-4xl font-bold mb-2">404 - Not Found</h1>
-        <p className="text-muted-foreground mb-6 text-center max-w-md">
-          Sorry, the page you are looking for does not exist or has been moved.
-        </p>
-        <Link href="/" className="inline-block px-6 py-2 rounded-full bg-primary text-primary-foreground font-semibold shadow hover:bg-primary/90 transition">
-          Go Home
-        </Link>
-      </div>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', background: '#fff', padding: 24 }}>
+      <h1 style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1rem' }}>404 - Not Found</h1>
+      <p style={{ color: '#888', marginBottom: '2rem', textAlign: 'center' }}>
+        Sorry, the page you are looking for does not exist.
+      </p>
+      <a href="/" style={{ padding: '0.75rem 2rem', borderRadius: '9999px', background: '#2563eb', color: '#fff', fontWeight: 600, textDecoration: 'none' }}>
+        Go Home
+      </a>
     </div>
   );
 }
