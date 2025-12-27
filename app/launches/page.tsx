@@ -33,6 +33,9 @@ function LaunchesPageContent() {
 
   return (
     <div className="container py-6 sm:py-8 space-y-6 sm:space-y-8 px-4">
+      <div className="mb-6 md:hidden flex justify-end">
+        <WalletButton />
+      </div>
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="space-y-1">

@@ -146,6 +146,9 @@ function LaunchDetailsContent() {
 
   return (
     <div className="container py-8 space-y-8">
+      <div className="mb-6 md:hidden flex justify-end">
+        <WalletButton />
+      </div>
       {/* Back Button */}
       <Button variant="ghost" asChild>
         <Link href="/launches">

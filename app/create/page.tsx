@@ -110,6 +110,9 @@ function CreateLaunchContent() {
 
   return (
     <div className="container py-8 max-w-4xl">
+      <div className="mb-6 md:hidden flex justify-end">
+        <WalletButton />
+      </div>
       {/* Header */}
       <div className="mb-8">
         <Button variant="ghost" asChild className="mb-4">
