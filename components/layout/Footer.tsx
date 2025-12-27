@@ -51,14 +51,8 @@ export function Footer() {
     <footer className="border-t bg-background">
       <div className="container py-8 sm:py-12 md:py-16 px-4">
         <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-4">
-          {/* Brand */}
+          {/* Brand (logo removed) */}
           <div className="col-span-2 md:col-span-1 space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-500">
-                <span className="text-white font-bold text-sm">M</span>
-              </div>
-              <span className="font-bold text-base sm:text-lg">Memestack</span>
-            </div>
             <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed mb-4">
               Fair launch platform for memecoins on Stacks blockchain.
             </p>

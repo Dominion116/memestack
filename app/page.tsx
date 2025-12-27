@@ -127,14 +127,6 @@ export default function HomePage() {
 			{/* How It Works Section (features-10 style) */}
 			<section id="how-it-works" className="min-h-screen flex items-center justify-center py-12">
 				<div className="w-full">
-					<div className="flex justify-center mb-4">
-						<Badge variant="secondary" className="rounded-full px-5 py-1.5 text-base font-normal border border-border shadow-sm" style={{ background: '#f6f8f9', backgroundColor: '#f6f8f9', color: '#11181c', fontWeight: 500 }}>
-							<span className="mr-2 text-blue-500">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.5l1.09 3.36a1 1 0 00.95.69h3.54l-2.87 2.09a1 1 0 00-.36 1.12l1.09 3.36-2.87-2.09a1 1 0 00-1.18 0l-2.87 2.09 1.09-3.36a1 1 0 00-.36-1.12L2.42 6.55h3.54a1 1 0 00.95-.69L8 2.5z" fill="currentColor"/></svg>
-							</span>
-							How It Works
-						</Badge>
-					</div>
 					<h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-center mb-4">
 						How It Works
 					</h2>
@@ -163,14 +155,6 @@ export default function HomePage() {
 			{/* Features Grid Section (shadcnblocks features-10 style) */}
 			<section className="min-h-screen flex items-center justify-center py-12 bg-muted/50">
 				<div className="w-full">
-					<div className="flex justify-center mb-4">
-						<Badge variant="secondary" className="rounded-full px-5 py-1.5 text-base font-normal border border-border shadow-sm" style={{ background: '#f6f8f9', backgroundColor: '#f6f8f9', color: '#11181c', fontWeight: 500 }}>
-							<span className="mr-2 text-blue-500">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.5l1.09 3.36a1 1 0 00.95.69h3.54l-2.87 2.09a1 1 0 00-.36 1.12l1.09 3.36-2.87-2.09a1 1 0 00-1.18 0l-2.87 2.09 1.09-3.36a1 1 0 00-.36-1.12L2.42 6.55h3.54a1 1 0 00.95-.69L8 2.5z" fill="currentColor"/></svg>
-							</span>
-							Why Choose Memestack
-						</Badge>
-					</div>
 					<h2 className="text-4xl sm:text-5xl font-semibold tracking-tight text-center mb-4">
 						Why Choose Memestack
 					</h2>
@@ -199,14 +183,6 @@ export default function HomePage() {
 			{/* FAQ Section */}
 			<section id="faq" className="py-16 sm:py-20 md:py-24 lg:py-32">
 				<div className="container max-w-3xl px-4">
-					<div className="flex justify-center mb-4">
-						<Badge variant="secondary" className="rounded-full px-5 py-1.5 text-base font-normal border border-border shadow-sm" style={{ background: '#f6f8f9', backgroundColor: '#f6f8f9', color: '#11181c', fontWeight: 500 }}>
-							<span className="mr-2 text-blue-500">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.5l1.09 3.36a1 1 0 00.95.69h3.54l-2.87 2.09a1 1 0 00-.36 1.12l1.09 3.36-2.87-2.09a1 1 0 00-1.18 0l-2.87 2.09 1.09-3.36a1 1 0 00-.36-1.12L2.42 6.55h3.54a1 1 0 00.95-.69L8 2.5z" fill="currentColor"/></svg>
-							</span>
-							FAQ
-						</Badge>
-					</div>
 					<div className="text-center mb-12 sm:mb-16">
 						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
 							Frequently Asked Questions
@@ -233,14 +209,6 @@ export default function HomePage() {
 			{/* CTA Section */}
 			<section className="py-16 sm:py-20 md:py-24 lg:py-32 bg-muted/50">
 				<div className="container px-4">
-					<div className="flex justify-center mb-4">
-						<Badge variant="secondary" className="rounded-full px-5 py-1.5 text-base font-normal border border-border shadow-sm" style={{ background: '#f6f8f9', backgroundColor: '#f6f8f9', color: '#11181c', fontWeight: 500 }}>
-							<span className="mr-2 text-blue-500">
-								<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 2.5l1.09 3.36a1 1 0 00.95.69h3.54l-2.87 2.09a1 1 0 00-.36 1.12l1.09 3.36-2.87-2.09a1 1 0 00-1.18 0l-2.87 2.09 1.09-3.36a1 1 0 00-.36-1.12L2.42 6.55h3.54a1 1 0 00.95-.69L8 2.5z" fill="currentColor"/></svg>
-							</span>
-							Get Started
-						</Badge>
-					</div>
 					<div className="mx-auto max-w-2xl text-center">
 						<h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
 							Ready to Launch Your Token?
